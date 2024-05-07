@@ -12,8 +12,8 @@
     </div>
     <div class="flex flex-col">
       <n-gradient-text :size="48">Vue3 Quick Fast</n-gradient-text>
-      <n-gradient-text :size="24" class="mt-12"
-        >Quick startup framework based on vue,</n-gradient-text
+      <n-gradient-text :size="24" class="mt-2"
+        >Quick startup framework based on Vue3,</n-gradient-text
       >
       <n-gradient-text :size="24">
         Includes
@@ -49,6 +49,7 @@ interface option {
   label: string
   value: string
 }
+
 const pluginList: Array<option> = [
   {
     label: 'Axios',
@@ -59,8 +60,8 @@ const pluginList: Array<option> = [
     value: 'https://pinia.vuejs.org/',
   },
   {
-    label: 'Element Plus',
-    value: 'https://element-plus.org/zh-CN/',
+    label: 'Naive UI',
+    value: 'https://www.naiveui.com/zh-CN/os-theme',
   },
   {
     label: 'Vue Router',
@@ -74,12 +75,8 @@ const langList: Array<option> = [
     value: 'https://developer.mozilla.org/',
   },
   {
-    label: 'Sass',
-    value: 'https://sass-lang.com/',
-  },
-  {
-    label: 'Tailwind CSS',
-    value: 'https://tailwindcss.com/',
+    label: 'UnoCSS',
+    value: 'https://unocss.dev/',
   },
 ]
 </script>
