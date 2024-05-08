@@ -1,17 +1,16 @@
 <template>
-  <div
-    class="index-layout h-screen box-border flex flex-col justify-between items-center p-20"
+  <n-config-provider
+    :theme-overrides="themeOverrides"
+    :theme="theme"
+    :locale="locale"
+    :date-locale="dateLocale"
   >
-    <n-config-provider
-      :theme-overrides="themeOverrides"
-      :theme="theme"
-      :locale="locale"
-      :date-locale="dateLocale"
+    <div
+      class="index-layout h-screen box-border flex flex-col justify-between items-center p-20"
     >
-      <div class="index-header">
+      <div class="index-header w-screen flex flex-col items-center">
         <slot name="header"></slot>
       </div>
-      <NThemeEditor></NThemeEditor>
       <div class="index-content">
         <slot name="default"></slot>
       </div>
@@ -19,9 +18,8 @@
       <div class="index-footer">
         <slot name="footer"></slot>
       </div>
-      
-    </n-config-provider>
-  </div>
+    </div>
+  </n-config-provider>
 </template>
 
 <script setup lang="ts">
@@ -35,13 +33,10 @@ import {
   GlobalThemeOverrides,
 } from 'naive-ui'
 import type { NLocale, NDateLocale } from 'naive-ui'
-import { NThemeEditor } from 'naive-ui'
 
 // 配置主题
 const themeOverrides: GlobalThemeOverrides = {
-  common: {
-    primaryColor: '#14C9C9',
-  },
+  common: {},
 }
 
 // 设置颜色主题

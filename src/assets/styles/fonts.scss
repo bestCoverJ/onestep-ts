@@ -1,15 +1,20 @@
 @font-face {
-  font-family: 'Source Sans';
+  font-family: 'SourceSans';
   src: url('../fonts/SourceSans3VF-Upright.ttf.woff2');
 }
 
+// @font-face {
+//   font-family: 'SourceHanSans';
+//   src: url('../fonts/SourceHanSans-VF.ttf.woff2');
+// }
+
 @font-face {
-  font-family: 'Source Han Sans';
-  src: url('../fonts/SourceHanSans-VF.ttf.woff2');
+  font-family: 'SourceHanSans Regular';
+  src: url('../fonts/SourceHanSansCN-Regular.otf');
 }
 
 * {
-  font-family: 'Source Sans', 'Source Han Sans';
+  font-family: 'SourceSans', 'SourceHanSans', 'SourceHanSans Regular' !important;
 }
 
 h1,

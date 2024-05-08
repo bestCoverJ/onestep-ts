@@ -5,13 +5,14 @@
         <div class="mt-16">
           <DateTime></DateTime>
         </div>
-      </template>
-      <template #default>
-        <div class="">
+        <div class="mt-4 w-1/2">
           <Search></Search>
         </div>
       </template>
-      <template #footer> OneStep 2024 </template>
+      <template #default> </template>
+      <template #footer>
+        <span class="text-stone-700">OneStep 2024</span>
+      </template>
     </indexLayout>
   </div>
 </template>
