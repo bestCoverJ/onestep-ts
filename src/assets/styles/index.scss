@@ -1,18 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import './fonts.scss';
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -24,40 +12,12 @@
   padding: 2em;
 }
 
+body {
+  margin: 0;
+  font-size: 16px;
+}
+
 body,
 #app {
-  @apply min-h-screen;
-}
-
-#app {
-  background: url('https://tailwindcss.com/_next/static/media/docs@tinypng.d9e4dcdc.png')
-    no-repeat;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-.index-page {
-  .logo {
-    height: 12rem;
-    padding: 1.5rem;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
-  }
+  min-height: 100vh;
 }

@@ -20,7 +20,12 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['src/view/index.vue', 'src/view/**/index.vue'], // 匹配views和二级目录中的index.vue
+      files: [
+        'src/components/**/index.vue',
+        'src/layout/*.vue',
+        'src/view/index.vue',
+        'src/view/**/index.vue',
+      ], // 匹配views和二级目录中的index.vue
       rules: {
         'vue/multi-word-component-names': 'off',
       }, //给上面匹配的文件指定规则
