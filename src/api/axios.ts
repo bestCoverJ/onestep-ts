@@ -136,14 +136,18 @@ interface sug {
   s: Array<string>
 }
 export function jsonp(url: string): Promise<any> {
-  return new Promise((resolve) => {
-    const script = document.createElement('script')
-    script.src = `${url}&cb=window.baidu`
-    document.body.appendChild(script)
-    window.baidu = (data: sug) => {
-      resolve(data)
-      document.body.removeChild(script)
-      delete window.baidu
+  return new Promise((resolve, reject) => {
+    try {
+      const script = document.createElement('script')
+      script.src = `${url}&cb=window.baidu`
+      document.body.appendChild(script)
+      window.baidu = (data: sug) => {
+        resolve(data)
+        document.body.removeChild(script)
+        delete window.baidu
+      }
+    } catch (err) {
+      reject(err)
     }
   })
 }
