@@ -2,7 +2,7 @@
   <div class="index-page h-full">
     <indexLayout>
       <template #header>
-        <div class="mt-16">
+        <div class="mt-8">
           <DateTime></DateTime>
         </div>
         <div class="mt-4 w-1/2">

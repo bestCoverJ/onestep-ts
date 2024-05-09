@@ -4,7 +4,6 @@
 import axios from 'axios'
 import { useMessage } from 'naive-ui'
 
-const NMessage = useMessage()
 axios.defaults.timeout = 30000
 
 /* 
@@ -14,9 +13,7 @@ axios.interceptors.request.use(
   (config) => {
     // config.data = JSON.stringify(config.data)
 
-    config.headers = {
-      'Content-Type': 'application/json',
-    }
+    config.headers['Content-Type'] = 'application/json'
     const token =
       sessionStorage.getItem('token') || localStorage.getItem('token') || ''
     if (token) {
@@ -42,6 +39,7 @@ axios.interceptors.response.use(
     return response
   },
   (err) => {
+    const NMessage = useMessage()
     if (err && err.response) {
       switch (err.response.status) {
         case 400: {
@@ -132,12 +130,17 @@ export function post(url: string, data: any): Promise<any> {
   })
 }
 
+interface sug {
+  q: string
+  p: boolean
+  s: Array<string>
+}
 export function jsonp(url: string): Promise<any> {
   return new Promise((resolve) => {
     const script = document.createElement('script')
     script.src = `${url}&cb=window.baidu`
     document.body.appendChild(script)
-    window.baidu = (data) => {
+    window.baidu = (data: sug) => {
       resolve(data)
       document.body.removeChild(script)
       delete window.baidu

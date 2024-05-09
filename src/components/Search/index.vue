@@ -1,14 +1,15 @@
 <template>
   <div class="component-search">
     <n-auto-complete
-      class="rounded-full"
       v-model:value="searchValue"
       size="large"
       placeholder=""
       clearable
+      :loading="searchLoading"
       :options="searchOption"
       @update:value="updateValue"
       @select="onSelect"
+      @keyup="onKeyup"
     ></n-auto-complete>
   </div>
 </template>
@@ -17,12 +18,25 @@
 import { ref } from 'vue'
 import { getSearchSug } from '@/api/url'
 
-const searchValue = ref('')
-const searchOption = ref([])
+const searchValue = ref<string>('')
+const searchOption = ref<Array<string>>([])
+const searchLoading = ref<boolean>(false)
 const updateValue = () => {
-  getSearchSug(searchValue.value).then((res) => {
-    searchOption.value = res.s
-  })
+  if (searchValue.value) {
+    searchLoading.value = true
+    getSearchSug(searchValue.value).then((res) => {
+      searchOption.value = [searchValue.value, ...res.s]
+      setTimeout(() => {
+        searchLoading.value = false
+      }, 200)
+    })
+  }
+}
+
+const onKeyup = (e: KeyboardEvent) => {
+  if (e.key == 'Enter') {
+    updateValue()
+  }
 }
 
 const onSelect = (value: string) => {
@@ -33,8 +47,16 @@ const onSelect = (value: string) => {
 <style lang="scss">
 .component-search {
   .n-input {
+    height: 3rem;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(20px);
+
+    .n-input__input {
+      .n-input__input-el {
+        font-size: 20px;
+        height: 3rem;
+      }
+    }
   }
 }
 </style>

@@ -39,9 +39,9 @@ const themeOverrides: GlobalThemeOverrides = {
   common: {},
 }
 
+const osThemeRef = useOsTheme()
 // 设置颜色主题
 const theme = computed(() => {
-  const osThemeRef = useOsTheme()
   return osThemeRef.value === 'dark' ? darkTheme : null
 })
 

@@ -8,9 +8,17 @@
 
 <script setup lang="ts">
 import dayjs from 'dayjs'
-import { ref } from 'vue'
+import { onUnmounted, ref } from 'vue'
 
-const curTime = ref(dayjs().format('HH:mm'))
+const curTime = ref<string>(dayjs().format('HH:mm'))
+
+const timer = setInterval(() => {
+  curTime.value = dayjs().format('HH:mm')
+}, 500)
+
+onUnmounted(() => {
+  clearInterval(timer)
+})
 </script>
 
 <style lang="scss" scoped>
