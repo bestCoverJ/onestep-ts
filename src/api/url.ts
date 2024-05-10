@@ -3,7 +3,7 @@ import { iHitokotoP } from './interface'
 
 // 获取搜索联想
 export function getSearchSug(params: string) {
-  return jsonp(`http://suggestion.baidu.com/su?wd=${params}`)
+  return jsonp(`https://suggestion.baidu.com/su?wd=${params}`)
 }
 
 // 获取一言信息

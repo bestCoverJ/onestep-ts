@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import basicSSL from "@vitejs/plugin-basic-ssl";
 import vue from '@vitejs/plugin-vue'
 import eslintPlugin from 'vite-plugin-eslint'
 import UnoCSS from 'unocss/vite'
@@ -10,6 +11,7 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   plugins: [
     vue(),
+    basicSSL(),
     UnoCSS(),
     eslintPlugin({
       include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue'],
@@ -40,6 +42,7 @@ export default defineConfig({
   server: {
     host: true,
     open: true,
+    https: true,
     proxy: {
       // api是自行设置的请求前缀，任何请求路径以/api开头的请求将被代理到对应的target目标
       '/api': {

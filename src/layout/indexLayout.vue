@@ -4,20 +4,25 @@
     :theme="theme"
     :locale="locale"
     :date-locale="dateLocale"
+    
   >
-    <div
-      class="index-layout h-screen box-border flex flex-col p-8 md:py10 md:px-14 xl:p16"
-    >
+    <n-message-provider>
       <div
-        class="index-content w-full flex-1 grid justify-items-center grid-cols-3 grid-rows-3 md:grid-cols-4 md:grid-rows-4 lg:grid-cols-5 gap-4"
+        class="index-layout h-screen box-border flex flex-col justify-center p-8 md:py10 md:px-14 xl:p16"
       >
-        <slot name="default"></slot>
-      </div>
+        <div
+          class="index-content box-border w-full h-1/2 md:h-2/3 lg:h-4/5 grid justify-items-center grid-cols-3 py-4 gap-4 lg:p-8 xl:grid-cols-4 2xl:grid-cols-5"
+        >
+          <slot name="default"></slot>
+        </div>
 
-      <div class="index-footer flex flex-row items-center justify-center">
-        <slot name="footer"></slot>
+        <div
+          class="index-footer flex-shrink-0 flex flex-row items-center justify-center"
+        >
+          <slot name="footer"></slot>
+        </div>
       </div>
-    </div>
+    </n-message-provider>
   </n-config-provider>
 </template>
 

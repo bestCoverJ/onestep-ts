@@ -1,5 +1,5 @@
 <template>
-  <div class="component-search w-full md:w-1/2">
+  <div class="component-search w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
     <n-auto-complete
       v-model:value="searchValue"
       size="large"
