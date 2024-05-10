@@ -6,16 +6,15 @@
     :date-locale="dateLocale"
   >
     <div
-      class="index-layout h-screen box-border flex flex-col justify-between items-center p-20"
+      class="index-layout h-screen box-border flex flex-col p-8 md:py10 md:px-14 xl:p16"
     >
-      <div class="index-header w-screen flex flex-col items-center">
-        <slot name="header"></slot>
-      </div>
-      <div class="index-content">
+      <div
+        class="index-content w-full flex-1 grid justify-items-center grid-cols-3 grid-rows-3 md:grid-cols-4 md:grid-rows-4 lg:grid-cols-5 gap-4"
+      >
         <slot name="default"></slot>
       </div>
 
-      <div class="index-footer">
+      <div class="index-footer flex flex-row items-center justify-center">
         <slot name="footer"></slot>
       </div>
     </div>
@@ -53,6 +52,8 @@ const dateLocale = ref<NDateLocale | null>(dateZhCN)
 </script>
 <style lang="scss">
 .index-layout {
-  background: url('@/assets/images/base_21.png') no-repeat;
+  // background: url('@/assets/images/base_21.png') no-repeat;
+  // background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
 }
 </style>
