@@ -4,14 +4,13 @@
     :theme="theme"
     :locale="locale"
     :date-locale="dateLocale"
-    
   >
     <n-message-provider>
       <div
         class="index-layout h-screen box-border flex flex-col justify-center p-8 md:py10 md:px-14 xl:p16"
       >
         <div
-          class="index-content box-border w-full h-1/2 md:h-2/3 lg:h-4/5 grid justify-items-center grid-cols-3 py-4 gap-4 lg:p-8 xl:grid-cols-4 2xl:grid-cols-5"
+          class="index-content box-border w-full h-1/2 md:h-2/3 lg:h-4/5 grid justify-items-center grid-cols-3 py-4 gap-8 lg:gap-16 lg:p-8 xl:grid-cols-4 2xl:grid-cols-5"
         >
           <slot name="default"></slot>
         </div>

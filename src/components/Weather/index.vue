@@ -13,13 +13,13 @@
     class="component-weather"
     :class="status"
   >
-    <div flex flex-col text-xl lg:text-2xl>
+    <div flex flex-col text-base lg:text-xl xl:text-2xl>
       <span>武汉</span>
-      <div class="text-4xl md:text-5xl lg:text-6xl">21°</div>
+      <div class="text-3xl  lg:text-4xl">21°</div>
     </div>
 
-    <div flex flex-col text-xl lg:text-2xl>
-      <img class="w-8 -ml-1" src="./assets/images/sunny.png" />
+    <div flex flex-col text-base lg:text-xl xl:text-2xl>
+      <img class="w-6 xl:w-8 -ml-1" :src="weatherIcon" />
       <span>晴</span>
       <span>17° - 25°</span>
     </div>
@@ -27,7 +27,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import Sunny from './assets/images/sunny.png'
+import Snowy from './assets/images/Snowy.png'
+import Rainy from './assets/images/Rainy.png'
+import RainThunder from './assets/images/RainThunder.png'
+import PartlyCloudy from './assets/images/PartlyCloudy.png'
 import { useMessage } from 'naive-ui'
 const NMessage = useMessage()
 
@@ -50,6 +55,22 @@ const getLocation = () => {
 }
 
 const status = ref('sunny')
+const weatherIcon = computed(() => {
+  switch (status.value) {
+    case 'sunny':
+      return Sunny
+    case 'partly-cloudy':
+      return PartlyCloudy
+    case 'snowy':
+      return Snowy
+    case 'rainy':
+      return Rainy
+    case 'rainthunder':
+      return RainThunder
+    default:
+      return Sunny
+  }
+})
 
 onMounted(() => {
   getLocation()
