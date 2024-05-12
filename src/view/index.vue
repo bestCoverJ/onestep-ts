@@ -2,7 +2,6 @@
   <div class="index-page h-full">
     <indexLayout>
       <template #default>
-        <DateTime class="col-span-3 md:col-span-4 lg:col-span-5"></DateTime>
         <Search class="col-span-3 md:col-span-4 lg:col-span-5"></Search>
         <Hitokoto></Hitokoto>
         <Weather></Weather>
@@ -16,7 +15,7 @@
 
 <script lang="ts" setup>
 import indexLayout from '@/layout/indexLayout.vue'
-import DateTime from '@/components/DateTime/index.vue'
+
 import Search from '@/components/Search/index.vue'
 import Hitokoto from '@/components/Hitokoto/index.vue'
 import Weather from '@/components/Weather/index.vue'

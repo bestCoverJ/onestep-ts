@@ -1,5 +1,6 @@
 <template>
-  <div class="component-search w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
+  <div class="component-search flex flex-col gap-4 items-center w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
+    <DateTime class="col-span-3 md:col-span-4 lg:col-span-5"></DateTime>
     <n-auto-complete
       v-model:value="searchValue"
       size="large"
@@ -17,6 +18,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { getSearchSug } from '@/api/url'
+import DateTime from '@/components/DateTime/index.vue'
 
 const searchValue = ref<string>('')
 const searchOption = ref<Array<string>>([])
