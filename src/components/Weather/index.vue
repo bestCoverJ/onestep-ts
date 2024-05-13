@@ -2,7 +2,6 @@
   <div
     flex
     flex-col
-    justify-between
     box-border
     w-full
     rounded
@@ -13,20 +12,30 @@
     class="component-weather"
     :class="status"
   >
-    <div flex flex-col text-base lg:text-xl xl:text-2xl>
-      <div class="flex flex-row items-center gap-1">
-        <span>{{ city.name }}</span>
-        <n-icon>
-          <LocationOnSharp></LocationOnSharp>
+    <div v-if="city.name" flex flex-col flex-1 justify-between>
+      <div flex flex-col text-base lg:text-xl xl:text-2xl>
+        <div class="flex flex-row items-center gap-1">
+          <span>{{ city.name }}</span>
+          <n-icon>
+            <LocationOnSharp></LocationOnSharp>
+          </n-icon>
+        </div>
+        <div class="text-3xl lg:text-4xl">{{ weather?.now.temp }}°C</div>
+      </div>
+
+      <div flex flex-col text-base lg:text-xl xl:text-2xl>
+        <img class="w-6 xl:w-8 -ml-1" :src="weatherIcon" />
+        <span>{{ weather?.now.text }}</span>
+        <span>{{ dayjs().format('YYYY/MM/DD HH:mm') }}</span>
+      </div>
+    </div>
+    <div v-else flex flex-col flex-1 items-center justify-center>
+      <div flex flex-row items-center gap-2 text-gray-600>
+        <span>暂无天气数据</span>
+        <n-icon cursor-pointer @click="getLocation">
+          <RefreshSharp></RefreshSharp>
         </n-icon>
       </div>
-      <div class="text-3xl lg:text-4xl">{{ weather?.now.temp }}°C</div>
-    </div>
-
-    <div flex flex-col text-base lg:text-xl xl:text-2xl>
-      <img class="w-6 xl:w-8 -ml-1" :src="weatherIcon" />
-      <span>{{ weather?.now.text }}</span>
-      <span>{{ dayjs().format('YYYY/MM/DD HH:mm') }}</span>
     </div>
   </div>
 </template>
@@ -34,7 +43,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-import { LocationOnSharp } from '@vicons/material'
+import { LocationOnSharp, RefreshSharp } from '@vicons/material'
 import Sunny from './assets/images/sunny.png'
 import Snowy from './assets/images/Snowy.png'
 import Rainy from './assets/images/Rainy.png'
@@ -67,17 +76,20 @@ const getCityWeather = () => {
     nowWeather.code !== '200' ||
     dayjs().diff(dayjs(nowWeather?.tm, 'hour')) >= 2
   ) {
-    getWeather(weatherP.value).then((res: iWeather) => {
-      const result = {
-        ...res,
-        tm: dayjs().format('YYYY:MM:DD HH'),
-      }
-      weather.value = result
-      localStorage.setItem('weather', JSON.stringify(result))
-    })
+    getWeatherByLocation()
   } else {
     weather.value = nowWeather
   }
+}
+const getWeatherByLocation = () => {
+  getWeather(weatherP.value).then((res: iWeather) => {
+    const result = {
+      ...res,
+      tm: dayjs().format('YYYY:MM:DD HH'),
+    }
+    weather.value = result
+    localStorage.setItem('weather', JSON.stringify(result))
+  })
 }
 
 const location = ref<iCity | null>(null)
@@ -113,20 +125,23 @@ const getCurCity = () => {
   const curLocation = JSON.parse(localStorage.getItem('location') || '{}')
 
   if (curLocation?.code !== '200') {
-    getCity(locationP.value).then((res: iCity) => {
-      const result = {
-        ...res,
-        tm: dayjs().format('YYYY:MM:DD HH'),
-      }
-      location.value = result
-      localStorage.setItem('location', JSON.stringify(result))
-
-      getCityWeather()
-    })
+    getCityByLocation()
   } else {
     location.value = curLocation
     getCityWeather()
   }
+}
+const getCityByLocation = () => {
+  getCity(locationP.value).then((res: iCity) => {
+    const result = {
+      ...res,
+      tm: dayjs().format('YYYY:MM:DD HH'),
+    }
+    location.value = result
+    localStorage.setItem('location', JSON.stringify(result))
+
+    getCityWeather()
+  })
 }
 
 const long = ref<number>(0)
