@@ -12,7 +12,7 @@
     :class="status"
   >
     <n-spin :show="loading" flex flex-1>
-      <div flex flex-1 w-full h-full items-center justify-center>
+      <div flex flex-col flex-1 w-full h-full justify-center>
         <div v-if="city.name" flex flex-col flex-1 justify-between>
           <div flex flex-col text-base lg:text-xl xl:text-2xl>
             <div class="flex flex-row items-center gap-1">
