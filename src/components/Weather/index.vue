@@ -5,38 +5,41 @@
     box-border
     w-full
     rounded
-    px-4
-    py-8
+    p-4
     bg-white
     text-black
     class="component-weather"
     :class="status"
   >
-    <div v-if="city.name" flex flex-col flex-1 justify-between>
-      <div flex flex-col text-base lg:text-xl xl:text-2xl>
-        <div class="flex flex-row items-center gap-1">
-          <span>{{ city.name }}</span>
-          <n-icon>
-            <LocationOnSharp></LocationOnSharp>
-          </n-icon>
-        </div>
-        <div class="text-3xl lg:text-4xl">{{ weather?.now.temp }}°C</div>
-      </div>
+    <n-spin :show="loading" flex flex-1>
+      <div flex flex-1 w-full h-full items-center justify-center>
+        <div v-if="city.name" flex flex-col flex-1 justify-between>
+          <div flex flex-col text-base lg:text-xl xl:text-2xl>
+            <div class="flex flex-row items-center gap-1">
+              <span>{{ city.name }}</span>
+              <n-icon>
+                <LocationOnSharp></LocationOnSharp>
+              </n-icon>
+            </div>
+            <div class="text-3xl lg:text-4xl">{{ weather?.now.temp }}°C</div>
+          </div>
 
-      <div flex flex-col text-base lg:text-xl xl:text-2xl>
-        <img class="w-6 xl:w-8 -ml-1" :src="weatherIcon" />
-        <span>{{ weather?.now.text }}</span>
-        <span>{{ dayjs().format('YYYY/MM/DD HH:mm') }}</span>
+          <div flex flex-col text-base lg:text-xl xl:text-2xl>
+            <img class="w-6 xl:w-8 -ml-1" :src="weatherIcon" />
+            <span>{{ weather?.now.text }}</span>
+            <span>{{ dayjs().format('YYYY/MM/DD HH:mm') }}</span>
+          </div>
+        </div>
+        <div v-else flex flex-col flex-1 items-center justify-center>
+          <div flex flex-row items-center gap-2 text-gray-600>
+            <span>暂无天气数据</span>
+            <n-icon cursor-pointer @click="getLocation">
+              <RefreshSharp></RefreshSharp>
+            </n-icon>
+          </div>
+        </div>
       </div>
-    </div>
-    <div v-else flex flex-col flex-1 items-center justify-center>
-      <div flex flex-row items-center gap-2 text-gray-600>
-        <span>暂无天气数据</span>
-        <n-icon cursor-pointer @click="getLocation">
-          <RefreshSharp></RefreshSharp>
-        </n-icon>
-      </div>
-    </div>
+    </n-spin>
   </div>
 </template>
 
@@ -147,7 +150,9 @@ const getCityByLocation = () => {
 const long = ref<number>(0)
 const lat = ref<number>(0)
 
+const loading = ref(false)
 const getLocation = () => {
+  loading.value = true
   if (navigator.geolocation) {
     const p = JSON.parse(sessionStorage.getItem('position') || '{}')
 
@@ -172,9 +177,11 @@ const getLocation = () => {
 
           console.log(`当前位置信息${lat.value}, ${long.value}`)
           getCurCity()
+          loading.value = false
         },
         () => {
           NMessage.warning('获取位置信息失败')
+          loading.value = false
         },
       )
     }

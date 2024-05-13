@@ -55,7 +55,7 @@ const getData = () => {
     localStorage.setItem('hitokoto', JSON.stringify(result))
     setTimeout(() => {
       loading.value = false
-    }, 500)
+    }, 200)
   })
 }
 // 一言数据缓存
