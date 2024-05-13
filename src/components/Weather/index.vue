@@ -162,6 +162,7 @@ const getLocation = () => {
 
       console.log(`当前位置信息${lat.value}, ${long.value}`)
       getCurCity()
+      loading.value = false
     } else {
       navigator.geolocation.getCurrentPosition(
         (position) => {
