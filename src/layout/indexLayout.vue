@@ -10,15 +10,15 @@
         class="index-layout h-screen box-border flex flex-col justify-center p-8 md:py10 md:px-14 xl:p16"
       >
         <div
-          class="index-content h-1/2 md:h-2/3 lg:h-4/5 lg:gap-16 lg:p-8 xl:grid-cols-4 2xl:grid-rows-4 2xl:grid-cols-5"
+          class="index-content grid-rows-[240px_240px] grid-cols-3 xl:grid-cols-4 2xl:grid-rows-[240px_240px_240px] 2xl:grid-cols-5"
           box-border
           w-full
-          xl:h-full
           grid
           justify-items-center
-          grid-cols-3
-          py-4
+          py-8
           gap-8
+          lg:gap-16
+          lg:p-16
         >
           <slot name="default"></slot>
         </div>

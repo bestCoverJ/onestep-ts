@@ -14,45 +14,158 @@
     :class="status"
   >
     <div flex flex-col text-base lg:text-xl xl:text-2xl>
-      <span>武汉</span>
-      <div class="text-3xl  lg:text-4xl">21°</div>
+      <div class="flex flex-row items-center gap-1">
+        <span>{{ city.name }}</span>
+        <n-icon>
+          <LocationOnSharp></LocationOnSharp>
+        </n-icon>
+      </div>
+      <div class="text-3xl lg:text-4xl">{{ weather?.now.temp }}°C</div>
     </div>
 
     <div flex flex-col text-base lg:text-xl xl:text-2xl>
       <img class="w-6 xl:w-8 -ml-1" :src="weatherIcon" />
-      <span>晴</span>
-      <span>17° - 25°</span>
+      <span>{{ weather?.now.text }}</span>
+      <span>{{ dayjs().format('YYYY/MM/DD HH:mm') }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
+
+import { LocationOnSharp } from '@vicons/material'
 import Sunny from './assets/images/sunny.png'
 import Snowy from './assets/images/Snowy.png'
 import Rainy from './assets/images/Rainy.png'
 import RainThunder from './assets/images/RainThunder.png'
 import PartlyCloudy from './assets/images/PartlyCloudy.png'
+
+import { getCity, getWeather } from './api'
+import { iCityP, iWeatherP, iLocation, iCity, iWeather } from './interface'
+import dayjs from 'dayjs'
 import { useMessage } from 'naive-ui'
 const NMessage = useMessage()
 
-const lat = ref<number>(0)
-const long = ref<number>(0)
-const getLocation = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        console.log(position)
-        lat.value = position.coords.latitude
-        long.value = position.coords.longitude
-        console.log(`当前位置信息${lat.value}, ${long.value}`)
-      },
-      () => {
-        NMessage.warning('获取位置信息失败')
-      },
-    )
+const weather = ref<iWeather | null>(null)
+const weatherP = computed<iWeatherP>(() => {
+  if (location.value?.location?.length) {
+    return {
+      location: location.value?.location[0].id,
+      key: '30eaa2640ae14ed69162532a94d32610',
+    }
+  }
+  return {
+    location: '',
+    key: '',
+  }
+})
+const getCityWeather = () => {
+  const nowWeather = JSON.parse(localStorage.getItem('weather') || '{}')
+
+  if (
+    nowWeather.code !== '200' ||
+    dayjs().diff(dayjs(nowWeather?.tm, 'hour')) >= 2
+  ) {
+    getWeather(weatherP.value).then((res: iWeather) => {
+      const result = {
+        ...res,
+        tm: dayjs().format('YYYY:MM:DD HH'),
+      }
+      weather.value = result
+      localStorage.setItem('weather', JSON.stringify(result))
+    })
+  } else {
+    weather.value = nowWeather
   }
 }
+
+const location = ref<iCity | null>(null)
+const city = computed<iLocation>(() => {
+  if (location.value?.location?.length) {
+    return location.value.location[0]
+  }
+  return {
+    id: '',
+    name: '',
+    lat: '',
+    lon: '',
+    adm2: '',
+    adm1: '',
+    country: '',
+    tz: '',
+    utcOffset: '',
+    isDst: '',
+    type: '',
+    rank: '',
+    fxLink: '',
+  }
+})
+const locationP = computed<iCityP>(() => {
+  return {
+    location: `${long.value.toFixed(2)},${lat.value.toFixed(2)}`,
+    key: '30eaa2640ae14ed69162532a94d32610',
+  }
+})
+
+// 城市信息缓存
+const getCurCity = () => {
+  const curLocation = JSON.parse(localStorage.getItem('location') || '{}')
+
+  if (curLocation?.code !== '200') {
+    getCity(locationP.value).then((res: iCity) => {
+      const result = {
+        ...res,
+        tm: dayjs().format('YYYY:MM:DD HH'),
+      }
+      location.value = result
+      localStorage.setItem('location', JSON.stringify(result))
+
+      getCityWeather()
+    })
+  } else {
+    location.value = curLocation
+    getCityWeather()
+  }
+}
+
+const long = ref<number>(0)
+const lat = ref<number>(0)
+
+const getLocation = () => {
+  if (navigator.geolocation) {
+    const p = JSON.parse(sessionStorage.getItem('position') || '{}')
+
+    if (p.long && p.lat) {
+      long.value = p.longitude
+      lat.value = p.latitude
+
+      console.log(`当前位置信息${lat.value}, ${long.value}`)
+      getCurCity()
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          long.value = position.coords.longitude
+          lat.value = position.coords.latitude
+          sessionStorage.setItem(
+            'position',
+            JSON.stringify({
+              long: position.coords.longitude,
+              lat: position.coords.latitude,
+            }),
+          )
+
+          console.log(`当前位置信息${lat.value}, ${long.value}`)
+          getCurCity()
+        },
+        () => {
+          NMessage.warning('获取位置信息失败')
+        },
+      )
+    }
+  }
+}
+getLocation()
 
 const status = ref('sunny')
 const weatherIcon = computed(() => {
@@ -70,10 +183,6 @@ const weatherIcon = computed(() => {
     default:
       return Sunny
   }
-})
-
-onMounted(() => {
-  getLocation()
 })
 </script>
 

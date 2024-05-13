@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { getHitokoto } from '@/api/url'
+import { getHitokoto } from './api'
 import { onMounted, computed, ref } from 'vue'
-import { iHitokotoP, iHitokoto } from '@/api/interface'
+import { iHitokotoP, iHitokoto } from './interface'
 import dayjs from 'dayjs'
 
 const params = computed<iHitokotoP>(() => {
@@ -31,20 +31,21 @@ const hitokoto = ref<iHitokoto | null>(null)
 
 const getData = () => {
   getHitokoto(params.value).then((res: iHitokoto) => {
-    hitokoto.value = res
-    localStorage.setItem(
-      'hitokoto',
-      JSON.stringify({
-        ...hitokoto.value,
-        tm: dayjs().format('YYYY:MM:DD HH'),
-      }),
-    )
+    const result = {
+      ...res,
+      tm: dayjs().format('YYYY:MM:DD HH'),
+    }
+    hitokoto.value = result
+    localStorage.setItem('hitokoto', JSON.stringify(result))
   })
 }
 // 一言数据缓存
 const cacheHitokoto = () => {
   const caHitokoto = JSON.parse(localStorage.getItem('hitokoto') || '{}')
-  if (!caHitokoto?.hitokoto || dayjs().diff(dayjs(caHitokoto?.tm, 'hour')) >= 1) {
+  if (
+    !caHitokoto?.hitokoto ||
+    dayjs().diff(dayjs(caHitokoto?.tm, 'hour')) >= 1
+  ) {
     getData()
   } else {
     hitokoto.value = caHitokoto

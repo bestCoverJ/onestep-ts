@@ -114,6 +114,12 @@
     "sourceMap": true,
     "outDir": "./built/"
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "global.d.ts"
+  ],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx", "**/*.spec.vue"]
 }
