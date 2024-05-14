@@ -11,7 +11,7 @@
         <span class="text-stone-900">OneStep 2024</span>
       </template>
       <template #topRight>
-        <Setting></Setting>
+        <!-- <Setting></Setting> -->
       </template>
     </indexLayout>
   </div>
@@ -24,7 +24,7 @@ import Search from '@/components/Search/index.vue'
 import Hitokoto from '@/components/Hitokoto/index.vue'
 import Weather2 from '@/components/Weather2/index.vue'
 import Collect from '@/components/Collect/index.vue'
-import Setting from '@/components/Setting/index.vue'
+// import Setting from '@/components/Setting/index.vue'
 </script>
 
 <style lang="scss">
