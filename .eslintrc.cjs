@@ -22,6 +22,7 @@ module.exports = {
     {
       files: [
         'src/components/**/index.vue',
+        'src/components/**/*.vue',
         'src/layout/*.vue',
         'src/view/index.vue',
         'src/view/**/index.vue',
@@ -29,6 +30,8 @@ module.exports = {
       rules: {
         'vue/multi-word-component-names': 'off',
         'vue/no-v-model-argument': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+        'no-undef': 'off',
       }, //给上面匹配的文件指定规则
     },
   ],

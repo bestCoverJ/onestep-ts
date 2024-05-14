@@ -6,5 +6,6 @@ export function getCity(params: iCityP) {
 }
 
 export function getWeather(params: iWeatherP) {
-  return get('https://devapi.qweather.com/v7/weather/now', params)
+  // return get('https://devapi.qweather.com/v7/weather/now', params)
+  return get('https://api.seniverse.com/v4')
 }

@@ -14,7 +14,7 @@
     <n-spin :show="loading" flex flex-1>
       <div flex flex-col flex-1 w-full h-full justify-center>
         <div v-if="city.name" flex flex-col flex-1 justify-between>
-          <div flex flex-col text-base lg:text-xl xl:text-2xl>
+          <div flex flex-col text-base lg:text-lg xl:text-xl>
             <div class="flex flex-row items-center gap-1">
               <span>{{ city.name }}</span>
               <n-icon>
@@ -25,14 +25,26 @@
           </div>
 
           <div flex flex-col text-base lg:text-xl xl:text-2xl>
-            <img class="w-6 xl:w-8 -ml-1" :src="weatherIcon" />
+            <!-- <img class="w-6 xl:w-8 -ml-1" :src="weatherIcon" /> -->
+            <span><i :class="`qi-${weather?.now.icon}`"></i></span>
             <span>{{ weather?.now.text }}</span>
-            <span>{{ dayjs().format('YYYY/MM/DD HH:mm') }}</span>
+            <div flex flex-row justify-between items-center>
+              <span>{{
+                dayjs(weather?.updateTime).format('MM/DD HH:mm')
+              }}</span>
+              <n-button quaternary circle @click="getWeatherByLocation">
+                <template #icon>
+                  <n-icon cursor-pointer text-gray-600>
+                    <RefreshSharp></RefreshSharp>
+                  </n-icon>
+                </template>
+              </n-button>
+            </div>
           </div>
         </div>
         <div v-else flex flex-col flex-1 items-center justify-center>
           <div flex flex-row items-center gap-2 text-gray-600>
-            <span>暂无天气数据</span>
+            <span v-if="!city.name">获取定位信息失败</span>
             <n-icon cursor-pointer @click="getLocation">
               <RefreshSharp></RefreshSharp>
             </n-icon>
@@ -85,6 +97,7 @@ const getCityWeather = () => {
   }
 }
 const getWeatherByLocation = () => {
+  loading.value = true
   getWeather(weatherP.value).then((res: iWeather) => {
     const result = {
       ...res,
@@ -92,6 +105,7 @@ const getWeatherByLocation = () => {
     }
     weather.value = result
     localStorage.setItem('weather', JSON.stringify(result))
+    loading.value = false
   })
 }
 
@@ -152,8 +166,8 @@ const lat = ref<number>(0)
 
 const loading = ref(false)
 const getLocation = () => {
-  loading.value = true
   if (navigator.geolocation) {
+    loading.value = true
     const p = JSON.parse(sessionStorage.getItem('position') || '{}')
 
     if (p.long && p.lat) {

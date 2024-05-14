@@ -1,6 +1,8 @@
 <template>
   <div class="component-date-time flex flex-col justify-center">
-    <n-gradient-text class="gradient-text font-bold text-7xl md:text-7xl lg:text-8xl">
+    <n-gradient-text
+      class="gradient-text font-bold text-7xl md:text-7xl lg:text-8xl"
+    >
       {{ curTime }}
     </n-gradient-text>
   </div>

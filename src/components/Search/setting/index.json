@@ -1,0 +1,48 @@
+{
+  "label": [
+    {
+      "label": "搜索引擎设置",
+      "value": "searchEngine",
+      "type": "select"
+    },
+    {
+      "label": "搜索联想来源",
+      "value": "searchAssociate",
+      "type": "select"
+    }
+  ],
+  "options": {
+    "searchEngine": [
+      {
+        "label": "百度",
+        "value": "https://www.baidu.com/s?wd="
+      },
+      {
+        "label": "必应",
+        "value": "https://cn.bing.com/search?q="
+      },
+      {
+        "label": "谷歌",
+        "value": "https://www.google.com/search?q="
+      },
+      {
+        "label": "搜狗",
+        "value": "https://www.sogou.com/web?query="
+      },
+      {
+        "label": "360",
+        "value": "https://www.so.com/s?q="
+      }
+    ],
+    "searchAssociate": [
+      {
+        "label": "百度",
+        "value": "https://suggestion.baidu.com/su?wd="
+      }
+    ]
+  },
+  "values": {
+    "searchEngine": "https://www.baidu.com/s?wd=",
+    "searchAssociate": "https://suggestion.baidu.com/su?wd="
+  }
+}
