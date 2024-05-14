@@ -77,7 +77,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import url('./assets/styles/index.scss');
+@import url('@/assets/Hitokoto/assets/styles/index.scss');
 
 .component-hitokoto {
   & * {
