@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import basicSSL from "@vitejs/plugin-basic-ssl";
+import basicSSL from '@vitejs/plugin-basic-ssl'
 import vue from '@vitejs/plugin-vue'
 import eslintPlugin from 'vite-plugin-eslint'
 import UnoCSS from 'unocss/vite'
@@ -36,6 +36,27 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': '/src',
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        charset: false,
+      },
+    },
+    postcss: {
+      plugins: [
+        {
+          postcssPlugin: 'internal:charset-removal',
+          AtRule: {
+            charset: (atRule) => {
+              if (atRule.name === 'charset') {
+                atRule.remove()
+              }
+            },
+          },
+        },
+      ],
     },
   },
 
