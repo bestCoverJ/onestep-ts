@@ -77,8 +77,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import url('@/assets/Hitokoto/assets/styles/index.scss');
-
 .component-hitokoto {
   & * {
     font-family: 'ZhuqueFangsong';

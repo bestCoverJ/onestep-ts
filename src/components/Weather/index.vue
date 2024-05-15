@@ -225,8 +225,6 @@ const weatherIcon = computed(() => {
 
 <style lang="scss" scoped>
 .component-weather {
-  @import url('@/assets/Weather/assets/styles/index.scss');
-
   &.sunny {
     background-image: linear-gradient(0deg, #a1c4fd 0%, #c2e9fb 100%);
   }
