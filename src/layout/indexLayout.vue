@@ -10,7 +10,7 @@
         class="index-layout position-relative h-screen box-border flex flex-col justify-center p-8 md:py10 md:px-14 xl:p16"
       >
         <div
-          class="index-content h-2/3 lg:grid lg:grid-rows-[240px_240px] grid-cols-3 xl:grid-cols-4 3xl:grid-rows-[240px_240px] 2xl:grid-cols-3"
+          class="index-content h-2/3 lg:grid lg:grid-rows-[240px_240px] grid-cols-4 3xl:grid-rows-[240px_240px] 2xl:grid-cols-3"
           box-border
           w-full
           justify-items-center
