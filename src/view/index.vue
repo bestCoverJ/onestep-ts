@@ -30,7 +30,8 @@ import Setting from '@/components/Setting/index.vue'
 
 import { useMediaQuery } from '@vueuse/core'
 
-const isLargeScreen = useMediaQuery('(min-width: 1024px)')
+// const isLargeScreen = useMediaQuery('(min-width: 1024px)')
+const isLargeScreen = false
 </script>
 
 <style lang="scss">
