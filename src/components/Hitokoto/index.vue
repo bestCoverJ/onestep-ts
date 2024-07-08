@@ -4,7 +4,7 @@
   >
     <n-spin :show="loading" flex flex-1>
       <div flex flex-col justify-between flex-1 w-full h-full>
-        <h2 class="text-xl m-0 lg:text-2xl 2xl:text-3xl">
+        <h2 class="text-lg m-0 lg:text-xl 2xl:text-2xl">
           {{ hitokoto?.hitokoto }}
         </h2>
         <div

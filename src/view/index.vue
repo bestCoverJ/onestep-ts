@@ -9,7 +9,7 @@
         <Link v-if="isLargeScreen"></Link>
       </template>
       <template #footer>
-        <span v-if="isLargeScreen" class="text-stone-900">OneStep 2024</span>
+        <span class="footer-text text-stone-900"> OneStep 2024 </span>
       </template>
       <template #topRight>
         <Setting v-if="isLargeScreen"></Setting>
@@ -30,8 +30,8 @@ import Setting from '@/components/Setting/index.vue'
 
 import { useMediaQuery } from '@vueuse/core'
 
-// const isLargeScreen = useMediaQuery('(min-width: 1024px)')
-const isLargeScreen = false
+const isLargeScreen = useMediaQuery('(min-width: 1024px)')
+// const isLargeScreen = false
 </script>
 
 <style lang="scss">

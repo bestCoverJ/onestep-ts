@@ -47,6 +47,7 @@ onUnmounted(() => {
 
     -webkit-background-clip: text; /*将设置的背景颜色限制在文字中*/
     -webkit-text-fill-color: transparent; /*给文字设置成透明*/
+    -webkit-text-stroke: 1px #cbd5e1;
   }
 }
 </style>
