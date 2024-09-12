@@ -8,6 +8,9 @@ module.exports = {
     'plugin:vue/essential',
     'plugin:@typescript-eslint/recommended',
   ],
+  globals: {
+    NodeJS: 'readonly'
+  },
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
