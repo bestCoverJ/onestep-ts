@@ -7,23 +7,33 @@
         <h2 class="text-lg m-0 lg:text-xl 2xl:text-2xl">
           {{ hitokoto?.hitokoto }}
         </h2>
-        <div
-          class="flex flex-row justify-end items-center gap-2 text-base lg:text-xl"
-        >
+        <div>
+          <div
+            class="flex flex-row justify-end items-center gap-2 text-base lg:text-xl"
+          >
           <span>
             {{ hitokoto?.from }}
           </span>
-          <span class="px-1 bg-red-400 text-white rounded">
+            <span class="px-1 bg-red-400 text-white rounded">
             {{ hitokoto?.from_who }}
           </span>
-          <n-button quaternary circle @click="getData">
-            <template #icon>
-              <n-icon cursor-pointer text-gray-600>
-                <RefreshSharp></RefreshSharp>
-              </n-icon>
-            </template>
-          </n-button>
+            <n-button quaternary circle @click="getData">
+              <template #icon>
+                <n-icon cursor-pointer text-gray-600>
+                  <RefreshSharp></RefreshSharp>
+                </n-icon>
+              </template>
+            </n-button>
+
+          </div>
+          <div mt-2 flex flex-row justify-center gap-1 text-stone-600 text-xs>
+            数据来源
+            <n-button text @click="onClickWeather" text-stone-600 text-xs>
+              一言
+            </n-button>
+          </div>
         </div>
+
       </div>
     </n-spin>
   </div>
@@ -38,7 +48,7 @@ import dayjs from 'dayjs'
 
 const params = computed<iHitokotoP>(() => {
   return {
-    c: 'i',
+    c: 'i'
   }
 })
 const hitokoto = ref<iHitokoto | null>(null)
@@ -49,7 +59,7 @@ const getData = () => {
   getHitokoto(params.value).then((res: iHitokoto) => {
     const result = {
       ...res,
-      tm: dayjs().format('YYYY:MM:DD HH'),
+      tm: dayjs().format('YYYY:MM:DD HH')
     }
     hitokoto.value = result
     localStorage.setItem('hitokoto', JSON.stringify(result))
@@ -69,6 +79,10 @@ const cacheHitokoto = () => {
   } else {
     hitokoto.value = caHitokoto
   }
+}
+
+const onClickWeather = () => {
+  window.open('https://hitokoto.cn/')
 }
 
 onMounted(() => {

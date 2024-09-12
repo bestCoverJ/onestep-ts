@@ -17,9 +17,7 @@
           <div flex flex-col text-base lg:text-base xl:text-lg>
             <div class="flex flex-row items-center gap-1">
               <span>{{ weather?.location.name }}</span>
-              <n-icon>
-                <LocationOnSharp></LocationOnSharp>
-              </n-icon>
+
             </div>
             <div class="text-2xl lg:text-3xl">
               {{ weather?.now.temperature }}°C
@@ -27,8 +25,9 @@
           </div>
 
           <div flex flex-col text-base gap-1 lg:text-base xl:text-xl>
+
+<!--            <span>{{ weather?.now.text }}</span>-->
             <img class="weather-icon w-4 xl:w-6" :src="weatherIcon" />
-            <span>{{ weather?.now.text }}</span>
             <div flex flex-row justify-between items-center>
               <span>
                 {{ dayjs(weather?.last_update).format('MM/DD HH:mm') }}

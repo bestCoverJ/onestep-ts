@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { getSearchSug } from '@/api/url'
+import { useDebounce } from '@/utils'
 import DateTime from '@/components/DateTime/index.vue'
 
 const searchValue = ref<string>('')
@@ -26,12 +27,14 @@ const searchLoading = ref<boolean>(false)
 const updateValue = () => {
   if (searchValue.value) {
     searchLoading.value = true
-    getSearchSug(searchValue.value).then((res) => {
-      searchOption.value = [searchValue.value, ...res.s]
-      setTimeout(() => {
-        searchLoading.value = false
-      }, 200)
-    })
+    useDebounce(() => {
+      getSearchSug(searchValue.value).then((res) => {
+        searchOption.value = [searchValue.value, ...res.s]
+        setTimeout(() => {
+          searchLoading.value = false
+        }, 200)
+      })
+    }, 500)
   }
 }
 
