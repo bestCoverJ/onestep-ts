@@ -11,7 +11,8 @@
       @update:value="updateValue"
       @select="onSelect"
       @keyup="onKeyup"
-    ></n-auto-complete>
+    >
+    </n-auto-complete>
   </div>
 </template>
 

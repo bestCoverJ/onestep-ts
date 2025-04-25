@@ -12,10 +12,10 @@
             class="flex flex-row justify-end items-center gap-2 text-base lg:text-xl"
           >
           <span>
-            {{ hitokoto?.from }}
+           {{ hitokoto?.from_who }}
           </span>
             <span class="px-1 bg-red-400 text-white rounded">
-            {{ hitokoto?.from_who }}
+              {{ hitokoto?.from }}
           </span>
             <n-button quaternary circle @click="getData">
               <template #icon>

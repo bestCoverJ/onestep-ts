@@ -13,6 +13,7 @@
     "@vueuse/core": "^10.9.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.11",
+    "lucide-vue-next": "^0.503.0",
     "pinia": "^2.1.6",
     "qweather-icons": "^1.6.0",
     "sass": "^1.64.1",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@unocss/preset-uno": "^0.59.4",
+    "@vicons/antd": "^0.13.0",
     "@vicons/material": "^0.12.0",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-vue": "^4.1.0",
@@ -39,5 +41,11 @@
     "vite": "^4.2.0",
     "vite-plugin-eslint": "^1.8.1",
     "vue-eslint-parser": "^9.3.1"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild",
+      "vue-demi"
+    ]
   }
 }
